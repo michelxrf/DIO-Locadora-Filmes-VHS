@@ -11,4 +11,4 @@ O código tem pleno funcionamento com capacidade para:
 - manter registro de clientes cadastrados;
 - registrar qual cliente alugou qual filme quando;
 
-Escolhi *flavor* retro para programa por ele ter sido desenvolvido em DOS. E com um pequeno *twist* de comédia pelo fato de o programa não salvar os registro no disco, assim todo o (dito) banco de dados é perdido sempre que o programa for fechado.
+Escolhi dar *flavor* retro para programa por ele ter sido desenvolvido em DOS. E com um pequeno *twist* de comédia pelo fato de o programa não salvar os registro no disco, assim todo o (dito) banco de dados é perdido sempre que o programa for fechado.
