@@ -11,7 +11,7 @@ namespace LocadoraVHS
             
 			string opcaoUsuario = ObterOpcaoUsuario();
 
-			while (opcaoUsuario.ToUpper() != "X")
+			while (true)
 			{
 				switch (opcaoUsuario)
 				{
@@ -47,18 +47,25 @@ namespace LocadoraVHS
 						VisualizarCliente();
 						break;
 
+					case "A":
+						Alugar();
+						break;
+					case "D":
+						Devolver();
+						break;
+
 					case "C":
 						Console.Clear();
 						break;
 
-					default:
-						throw new ArgumentOutOfRangeException();
+					case "X":
+						System.Environment.Exit(0);
+						break;
 				}
 
 				opcaoUsuario = ObterOpcaoUsuario();
 			}
 
-			Console.ReadLine();
         }
 
 
@@ -260,6 +267,49 @@ namespace LocadoraVHS
 			repositorioClientes.Atualiza(indiceCliente, atualizaCliente);
 		}
 
+		// ALUGUEIS E DEVOLUÇÕES
+		private static void Alugar()
+		{
+			Console.Write("Digite o id do cliente: ");
+			int indiceCliente = int.Parse(Console.ReadLine());
+
+			Console.Write("Digite o id do filme: ");
+			int indiceFilme = int.Parse(Console.ReadLine());
+
+			if(repositorioFilmes.RetornaPorId(indiceFilme).RetornaStatus() == FilmeStatus.Disponivel)
+			{
+				repositorioFilmes.RetornaPorId(indiceFilme).Alugar(indiceCliente);
+				repositorioClientes.RetornaPorId(indiceCliente).Alugar(indiceFilme);
+
+				Console.WriteLine("Sucesso! Pressione ENTER para continuar");
+				Console.ReadLine();
+			}
+			else
+			{
+				Console.WriteLine($"Impossível alugar, o filme encontra-se {repositorioFilmes.RetornaPorId(indiceFilme).RetornaStatus()}");
+				Console.WriteLine("Sucesso! Pressione ENTER para continuar");
+			}
+			
+			Console.ReadLine();		
+		}
+
+		public static void Devolver()
+		{
+			Console.Write("Digite o id do filme: ");
+			int indiceFilme = int.Parse(Console.ReadLine());
+
+			if((repositorioFilmes.RetornaPorId(indiceFilme).RetornaStatus() == FilmeStatus.Alugado))
+			{
+				int indiceCliente = repositorioFilmes.RetornaPorId(indiceFilme).RetornaTomador();
+				repositorioClientes.RetornaPorId(indiceCliente).Devolver(indiceFilme);
+				// Aqui é bom colocar uma verificação, caso o cadastro do cliente ou do filme tenha sido
+				//manualmente alterado pode causar um crash aqui
+
+				repositorioFilmes.RetornaPorId(indiceFilme).Devolver();
+
+			}
+		}
+
 		// INTERFACE COM USUARIO
         private static string ObterOpcaoUsuario()
 		{
@@ -279,12 +329,13 @@ namespace LocadoraVHS
 			Console.WriteLine("4C- Banir cliente");
 			Console.WriteLine("5C- Visualizar cliente");
 			Console.WriteLine("--------------------");
+			Console.WriteLine("A- Alugar filme");
+			Console.WriteLine("D- Devolver filme");
 			Console.WriteLine("C- Limpar Tela");
 			Console.WriteLine("X- Sair");
 			Console.WriteLine();
 
 			string opcaoUsuario = Console.ReadLine().ToUpper();
-			Console.WriteLine();
 			return opcaoUsuario;
 		}
     }

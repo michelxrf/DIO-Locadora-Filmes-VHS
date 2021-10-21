@@ -40,6 +40,16 @@ namespace LocadoraVHS
 		{
 			return this.Nome;
 		}
+
+        public void Alugar(int filmeId)
+        {
+            filmesEmPosse.Add(filmeId);
+        }
+
+        public void Devolver(int filmeId)
+        {
+            filmesEmPosse.Remove(filmeId);
+        }
     }
     
 }

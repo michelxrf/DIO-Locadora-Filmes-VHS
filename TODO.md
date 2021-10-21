@@ -1,6 +1,4 @@
 # TODO list
-- criar campo em filmes para mostrar quem alugou o filme
-- criar função Alugar
-- criar função Devolver
-- criar log?
-- salvar em CSV?
+- validar entradas de dados
+- melhorar UX: colocar "pressione ENTER para continuar" onde for adequado
+- gravar e ler em CSV
