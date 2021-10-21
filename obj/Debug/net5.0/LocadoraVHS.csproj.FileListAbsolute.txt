@@ -1,0 +1,16 @@
+E:\Take Blip Bootcamp\LocadoraVHS\bin\Debug\net5.0\LocadoraVHS.exe
+E:\Take Blip Bootcamp\LocadoraVHS\bin\Debug\net5.0\LocadoraVHS.deps.json
+E:\Take Blip Bootcamp\LocadoraVHS\bin\Debug\net5.0\LocadoraVHS.runtimeconfig.json
+E:\Take Blip Bootcamp\LocadoraVHS\bin\Debug\net5.0\LocadoraVHS.runtimeconfig.dev.json
+E:\Take Blip Bootcamp\LocadoraVHS\bin\Debug\net5.0\LocadoraVHS.dll
+E:\Take Blip Bootcamp\LocadoraVHS\bin\Debug\net5.0\ref\LocadoraVHS.dll
+E:\Take Blip Bootcamp\LocadoraVHS\bin\Debug\net5.0\LocadoraVHS.pdb
+E:\Take Blip Bootcamp\LocadoraVHS\obj\Debug\net5.0\LocadoraVHS.csproj.AssemblyReference.cache
+E:\Take Blip Bootcamp\LocadoraVHS\obj\Debug\net5.0\LocadoraVHS.GeneratedMSBuildEditorConfig.editorconfig
+E:\Take Blip Bootcamp\LocadoraVHS\obj\Debug\net5.0\LocadoraVHS.AssemblyInfoInputs.cache
+E:\Take Blip Bootcamp\LocadoraVHS\obj\Debug\net5.0\LocadoraVHS.AssemblyInfo.cs
+E:\Take Blip Bootcamp\LocadoraVHS\obj\Debug\net5.0\LocadoraVHS.csproj.CoreCompileInputs.cache
+E:\Take Blip Bootcamp\LocadoraVHS\obj\Debug\net5.0\LocadoraVHS.dll
+E:\Take Blip Bootcamp\LocadoraVHS\obj\Debug\net5.0\ref\LocadoraVHS.dll
+E:\Take Blip Bootcamp\LocadoraVHS\obj\Debug\net5.0\LocadoraVHS.pdb
+E:\Take Blip Bootcamp\LocadoraVHS\obj\Debug\net5.0\LocadoraVHS.genruntimeconfig.cache
