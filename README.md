@@ -15,7 +15,7 @@ O código tem pleno funcionamento com capacidade para:
 - salva o banco de dados em .csv
 
 ## Principais desafios enfrentados
-#### Parse de Enum ao ler .csv
+### Parse de Enum ao ler .csv
 
 Alguns campos da classe filme são Enums. E eu estava salvando os dados do programa em arquivo csv.
 
@@ -23,6 +23,6 @@ Quando estava criando o método para ler os dados dos arquivos .csv tive problem
 
 Procurei bastante na documentação e acabei por solucionar assim:
 
-'''
+```c#
 Enum.Parse<Genero>(campos[3])
-'''
+```
