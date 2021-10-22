@@ -16,6 +16,18 @@ namespace LocadoraVHS
             this.Banido = false;
         }
 
+        public Cliente(int id, string nome, bool banido, int[] filmesEmPosse_CSV)
+        {
+            this.Id = id;
+            this.Nome = nome;
+            this.Banido = banido;
+            
+            foreach(int filme in filmesEmPosse_CSV)
+            {
+                filmesEmPosse.Add(filme);
+            }
+        }
+
         public List<int> ListarFilmesEmPosse(int id)
         {
             return filmesEmPosse;
@@ -50,6 +62,20 @@ namespace LocadoraVHS
         {
             filmesEmPosse.Remove(filmeId);
         }
+
+        public string RetornaStringCSV()
+        {
+            string retorno = $"{this.Id},{this.Nome},{this.Banido}";
+            if(this.filmesEmPosse.Count > 0)
+            {
+                foreach(int filmeId in this.filmesEmPosse)
+                {
+                    retorno += $",{filmeId}";
+                }
+            }
+            return retorno;
+        }
+        
     }
     
 }

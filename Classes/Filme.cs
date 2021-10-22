@@ -10,7 +10,6 @@ namespace LocadoraVHS
 		private string Titulo { get; set; }
 		private string Descricao { get; set; }
 		private int Ano { get; set; }
-        private bool Excluido {get; set;}
 		private int IdClienteTomador { get; set; }
 
         // Métodos
@@ -21,9 +20,18 @@ namespace LocadoraVHS
 			this.Titulo = titulo;
 			this.Descricao = descricao;
 			this.Ano = ano;
-            this.Excluido = false;
 			this.FilmeStatus = filmeStatus;
 			this.IdClienteTomador = -1;// -1 quer dizer que o filme não está alugado
+		}
+		public Filme(int id, Genero genero, string titulo, string descricao, int ano, FilmeStatus filmeStatus, int idClienteTomador)
+		{
+			this.Id = id;
+			this.Genero = genero;
+			this.Titulo = titulo;
+			this.Descricao = descricao;
+			this.Ano = ano;
+			this.FilmeStatus = filmeStatus;
+			this.IdClienteTomador = idClienteTomador;
 		}
 
         public override string ToString()
@@ -33,7 +41,6 @@ namespace LocadoraVHS
             retorno += "Titulo: " + this.Titulo + Environment.NewLine;
             retorno += "Descrição: " + this.Descricao + Environment.NewLine;
             retorno += "Ano de Início: " + this.Ano + Environment.NewLine;
-            retorno += "Excluido: " + this.Excluido + Environment.NewLine;
 			retorno += "Status: " + this.FilmeStatus;
 			if(this.FilmeStatus == FilmeStatus.Alugado)
 			{
@@ -51,13 +58,6 @@ namespace LocadoraVHS
 		{
 			return this.Id;
 		}
-        public bool retornaExcluido()
-		{
-			return this.Excluido;
-		}
-        public void Excluir() {
-            this.Excluido = true;
-        }
 
 		public void MudarStatus(FilmeStatus filmeStatus)
 		{
@@ -89,6 +89,11 @@ namespace LocadoraVHS
 		public FilmeStatus RetornaStatus()
 		{
 			return this.FilmeStatus;
+		}
+
+		public string RetornaStringCSV()
+		{
+			return $"{this.Id},{this.Titulo},{this.Descricao},{this.Genero},{this.Ano},{this.FilmeStatus},{this.IdClienteTomador}";
 		}
     }
 }

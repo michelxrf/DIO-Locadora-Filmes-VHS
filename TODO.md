@@ -1,4 +1,4 @@
 # TODO list
-- validar entradas de dados
-- melhorar UX: colocar "pressione ENTER para continuar" onde for adequado
-- gravar e ler em CSV
+- validar entradas de usuário
+- UX: colocar "pressione ENTER para continuar" onde for adequado
+- UX: limpar tela a cada novo comando, remover comando limpar tela

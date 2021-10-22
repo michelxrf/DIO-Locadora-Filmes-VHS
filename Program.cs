@@ -6,9 +6,13 @@ namespace LocadoraVHS
     {
         static FilmeRepositorio repositorioFilmes = new FilmeRepositorio();
 		static ClienteRepositorio repositorioClientes = new ClienteRepositorio();
+
         static void Main(string[] args)
         {
             
+			repositorioFilmes.LerDeArquivo();
+			repositorioClientes.LerDeArquivo();
+
 			string opcaoUsuario = ObterOpcaoUsuario();
 
 			while (true)
@@ -25,9 +29,6 @@ namespace LocadoraVHS
 						AtualizarFilme();
 						break;
 					case "4F":
-						ExcluirFilme();
-						break;
-					case "5F":
 						VisualizarFilme();
 						break;
 
@@ -63,6 +64,9 @@ namespace LocadoraVHS
 						break;
 				}
 
+				repositorioClientes.GravarEmArquivo();
+				repositorioFilmes.GravarEmArquivo();
+
 				opcaoUsuario = ObterOpcaoUsuario();
 			}
 
@@ -70,14 +74,6 @@ namespace LocadoraVHS
 
 
 		// METODOS PARA LIDAR COM FILMES
-        private static void ExcluirFilme()
-		{
-			Console.Write("Digite o id do filme: ");
-			int indiceFilme = int.Parse(Console.ReadLine());
-
-			repositorioFilmes.Exclui(indiceFilme);
-		}
-
         private static void VisualizarFilme()
 		{
 			Console.Write("Digite o id do filme: ");
@@ -139,10 +135,8 @@ namespace LocadoraVHS
 			}
 
 			foreach (var filme in lista)
-			{
-                var excluido = filme.retornaExcluido();
-                
-				Console.WriteLine("#ID {0}: - {1} {2}", filme.retornaId(), filme.retornaTitulo(), (excluido ? "*Excluído*" : ""));
+			{  
+				Console.WriteLine("#ID {0}: - {1}", filme.retornaId(), filme.retornaTitulo());
 			}
 		}
 
@@ -166,7 +160,7 @@ namespace LocadoraVHS
 			Console.Write("Digite a Descrição do Filme: ");
 			string entradaDescricao = Console.ReadLine();
 
-			foreach (int i in Enum.GetValues(typeof(FilmeStatus)))
+			for (int i = 0; i < 3 ; i++)
 			{
 				Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(FilmeStatus), i));
 			}
@@ -192,7 +186,7 @@ namespace LocadoraVHS
 			int indiceCliente = int.Parse(Console.ReadLine());
 
 			// Preferia trocar o nome do metodo para banir, mas a Interface me restringe a usar "Exclui"
-			repositorioClientes.Exclui(indiceCliente);
+			repositorioClientes.Banir(indiceCliente);
 		}
 
 		private static void VisualizarCliente()
@@ -320,8 +314,7 @@ namespace LocadoraVHS
 			Console.WriteLine("1F- Listar filmes");
 			Console.WriteLine("2F- Inserir novo filme");
 			Console.WriteLine("3F- Atualizar filme");
-			Console.WriteLine("4F- Excluir filme");
-			Console.WriteLine("5F- Visualizar filme");
+			Console.WriteLine("4F- Visualizar filme");
 			Console.WriteLine("--------------------");
 			Console.WriteLine("1C- Listar clientes");
 			Console.WriteLine("2C- Inserir novo cliente");

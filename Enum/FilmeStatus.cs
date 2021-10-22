@@ -3,10 +3,10 @@ namespace LocadoraVHS
     public enum FilmeStatus
     {
         Disponivel = 0,
-        Alugado = 1,
+        EmEspera = 1,
         EmReparo = 2,
         Extraviado = 3,
-        EmEspera = 4
+        Alugado = 4
     }
 }
 

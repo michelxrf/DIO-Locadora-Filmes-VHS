@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using LocadoraVHS.Interfaces;
+using System.IO;
 
 namespace LocadoraVHS
 {
@@ -12,10 +13,6 @@ namespace LocadoraVHS
 			listaFilme[id] = objeto;
 		}
 
-		public void Exclui(int id)
-		{
-			listaFilme[id].Excluir();
-		}
 
 		public void Insere(Filme objeto)
 		{
@@ -36,5 +33,30 @@ namespace LocadoraVHS
 		{
 			return listaFilme[id];
 		}
-	}
+        
+    	public void GravarEmArquivo()
+        {
+            using (StreamWriter sw = new StreamWriter("RepistórioDeFilmes.csv"))
+            {
+                foreach (Filme filme in listaFilme)
+                {
+                    sw.WriteLine(filme.RetornaStringCSV());
+                }
+            }
+        }
+
+		public void LerDeArquivo()
+		{
+			string line = "";
+            using (StreamReader sr = new StreamReader("RepistórioDeFilmes.csv"))
+            {
+                while ((line = sr.ReadLine()) != null)
+                {
+					string[] campos = line.Split(',');
+                    Filme filme = new Filme(id:int.Parse(campos[0]), genero:Enum.Parse<Genero>(campos[3]), titulo:campos[1], descricao:campos[2], ano:int.Parse(campos[4]), filmeStatus:Enum.Parse<FilmeStatus>(campos[5]), idClienteTomador:int.Parse(campos[6]));
+					Insere(filme);
+				}
+            }
+		}
+    }
 }
