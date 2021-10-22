@@ -51,22 +51,26 @@ namespace LocadoraVHS
         }
         public void LerDeArquivo()
 		{
-			string line = "";
-            using (StreamReader sr = new StreamReader("RepistórioDeClientes.csv"))
+			if(File.Exists("RepistórioDeClientes.csv"))
             {
-                while ((line = sr.ReadLine()) != null)
+                string line = "";
+                using (StreamReader sr = new StreamReader("RepistórioDeClientes.csv"))
                 {
-					string[] campos = line.Split(',');
-                    int[] filmesComCliente = new int[campos.Length - 3];
-                    
-                    for(int i = 3; i < campos.Length; i++)
+                    while ((line = sr.ReadLine()) != null)
                     {
-                        filmesComCliente[i - 3] = int.Parse(campos[i]);
+                        string[] campos = line.Split(',');
+                        int[] filmesComCliente = new int[campos.Length - 3];
+                        
+                        for(int i = 3; i < campos.Length; i++)
+                        {
+                            filmesComCliente[i - 3] = int.Parse(campos[i]);
+                        }
+                        Cliente cliente = new Cliente(id:int.Parse(campos[0]), nome:campos[1], banido:bool.Parse(campos[2]), filmesEmPosse_CSV:filmesComCliente);
+                        Insere(cliente);
                     }
-                    Cliente cliente = new Cliente(id:int.Parse(campos[0]), nome:campos[1], banido:bool.Parse(campos[2]), filmesEmPosse_CSV:filmesComCliente);
-					Insere(cliente);
-				}
+                }
             }
+            
 		}
     }
 }

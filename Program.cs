@@ -55,12 +55,17 @@ namespace LocadoraVHS
 						Devolver();
 						break;
 
-					case "C":
-						Console.Clear();
-						break;
-
 					case "X":
 						System.Environment.Exit(0);
+						break;
+
+					default:
+						Console.WriteLine("Comando inválido. Consulte a tabela acima para saber os comandos válidos.");
+						
+						Console.WriteLine();
+						Console.WriteLine("Pressione uma tecla para continuar");
+						Console.ReadKey();
+						Console.Clear();	
 						break;
 				}
 
@@ -78,16 +83,22 @@ namespace LocadoraVHS
 		{
 			Console.Write("Digite o id do filme: ");
 			int indiceFilme = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			var filme = repositorioFilmes.RetornaPorId(indiceFilme);
 
 			Console.WriteLine(filme);
+			Console.WriteLine();
+			Console.WriteLine("Pressione uma tecla para continuar");
+			Console.ReadKey();
+			Console.Clear();		
 		}
 
         private static void AtualizarFilme()
 		{
 			Console.Write("Digite o id do filme: ");
 			int indiceFilme = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			foreach (int i in Enum.GetValues(typeof(Genero)))
 			{
@@ -95,15 +106,19 @@ namespace LocadoraVHS
 			}
 			Console.Write("Digite o gênero entre as opções acima: ");
 			int entradaGenero = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			Console.Write("Digite o Título do Filme: ");
 			string entradaTitulo = Console.ReadLine();
+			Console.Clear();
 
 			Console.Write("Digite o Ano de Início do Filme: ");
 			int entradaAno = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			Console.Write("Digite a Descrição do Filme: ");
 			string entradaDescricao = Console.ReadLine();
+			Console.Clear();
 
 			foreach (int i in Enum.GetValues(typeof(FilmeStatus)))
 			{
@@ -112,6 +127,7 @@ namespace LocadoraVHS
 
 			Console.Write("Digite a situação do filme entre as opções acima: ");
 			int entradaStatus = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			Filme atualizaFilme = new Filme(id: indiceFilme,
 										genero: (Genero)entradaGenero,
@@ -124,41 +140,48 @@ namespace LocadoraVHS
 		}
         private static void ListarFilmes()
 		{
-			Console.WriteLine("Listar filmes");
-
 			var lista = repositorioFilmes.Lista();
 
 			if (lista.Count == 0)
 			{
 				Console.WriteLine("Nenhum filme cadastrada.");
-				return;
+			}
+			else
+			{
+				foreach (var filme in lista)
+				{  
+					Console.WriteLine("#ID {0}: - {1}", filme.retornaId(), filme.retornaTitulo());
+				}
 			}
 
-			foreach (var filme in lista)
-			{  
-				Console.WriteLine("#ID {0}: - {1}", filme.retornaId(), filme.retornaTitulo());
-			}
+			Console.WriteLine();
+			Console.WriteLine("Pressione uma tecla para continuar");
+			Console.ReadKey();
+			Console.Clear();	
+			
 		}
 
         private static void InserirFilme()
 		{
-			Console.WriteLine("Inserir novo filme");
-
 			foreach (int i in Enum.GetValues(typeof(Genero)))
 			{
 				Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Genero), i));
 			}
 			Console.Write("Digite o gênero entre as opções acima: ");
 			int entradaGenero = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			Console.Write("Digite o Título do Filme: ");
 			string entradaTitulo = Console.ReadLine();
+			Console.Clear();
 
 			Console.Write("Digite o Ano de Início do Filme: ");
 			int entradaAno = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			Console.Write("Digite a Descrição do Filme: ");
 			string entradaDescricao = Console.ReadLine();
+			Console.Clear();
 
 			for (int i = 0; i < 3 ; i++)
 			{
@@ -167,6 +190,7 @@ namespace LocadoraVHS
 
 			Console.Write("Digite a situação do filme entre as opções acima: ");
 			int entradaStatus = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			Filme novoFilme = new Filme(id: repositorioFilmes.ProximoId(),
 										genero: (Genero)entradaGenero,
@@ -184,6 +208,7 @@ namespace LocadoraVHS
 		{
 			Console.Write("Digite o id do cliente: ");
 			int indiceCliente = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			// Preferia trocar o nome do metodo para banir, mas a Interface me restringe a usar "Exclui"
 			repositorioClientes.Banir(indiceCliente);
@@ -193,6 +218,7 @@ namespace LocadoraVHS
 		{
 			Console.Write("Digite o id do cliente: ");
 			int indiceCliente = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			var cliente = repositorioClientes.RetornaPorId(indiceCliente);
 
@@ -212,34 +238,43 @@ namespace LocadoraVHS
 				Console.WriteLine("Cliente SEM filmes.");
 			}
 
+			Console.WriteLine();
+			Console.WriteLine("Pressione uma tecla para continuar");
+			Console.ReadKey();
+			Console.Clear();	
+
 		}
 
 		private static void ListarClientes()
 		{
-			Console.WriteLine("Listar clientes");
-
 			var lista = repositorioClientes.Lista();
 
 			if (lista.Count == 0)
 			{
 				Console.WriteLine("Nenhum cliente cadastrado.");
-				return;
+			}
+			else
+			{
+				foreach (var cliente in lista)
+				{
+					var excluido = cliente.retornaBanido();
+					
+					Console.WriteLine("#ID {0}: - {1} {2}", cliente.retornaId(), cliente.retornaNome(), (excluido ? "*BANIDO*" : ""));
+				}
 			}
 
-			foreach (var cliente in lista)
-			{
-                var excluido = cliente.retornaBanido();
-                
-				Console.WriteLine("#ID {0}: - {1} {2}", cliente.retornaId(), cliente.retornaNome(), (excluido ? "*BANIDO*" : ""));
-			}
+			Console.WriteLine();
+			Console.WriteLine("Pressione uma tecla para continuar");
+			Console.ReadKey();
+			Console.Clear();	
+
 		}
 
 		private static void InserirCliente()
 		{
-			Console.WriteLine("Inserir novo cliente");
-
 			Console.Write("Digite o nome do cliente: ");
 			string entradaNome = Console.ReadLine();
+			Console.Clear();
 
 			Cliente novoCliente = new Cliente(id: repositorioClientes.ProximoId(),
 										nome: entradaNome);
@@ -251,9 +286,11 @@ namespace LocadoraVHS
 		{
 			Console.Write("Digite o id do cliente: ");
 			int indiceCliente = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			Console.Write("Digite o nome do cliente: ");
 			string entradaNome = Console.ReadLine();
+			Console.Clear();
 
 			Cliente atualizaCliente = new Cliente(id: indiceCliente,
 										nome: entradaNome);
@@ -266,31 +303,33 @@ namespace LocadoraVHS
 		{
 			Console.Write("Digite o id do cliente: ");
 			int indiceCliente = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			Console.Write("Digite o id do filme: ");
 			int indiceFilme = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			if(repositorioFilmes.RetornaPorId(indiceFilme).RetornaStatus() == FilmeStatus.Disponivel)
 			{
 				repositorioFilmes.RetornaPorId(indiceFilme).Alugar(indiceCliente);
 				repositorioClientes.RetornaPorId(indiceCliente).Alugar(indiceFilme);
-
-				Console.WriteLine("Sucesso! Pressione ENTER para continuar");
-				Console.ReadLine();
 			}
 			else
 			{
 				Console.WriteLine($"Impossível alugar, o filme encontra-se {repositorioFilmes.RetornaPorId(indiceFilme).RetornaStatus()}");
-				Console.WriteLine("Sucesso! Pressione ENTER para continuar");
 			}
 			
-			Console.ReadLine();		
+			Console.WriteLine();
+			Console.WriteLine("Pressione uma tecla para continuar");
+			Console.ReadKey();
+			Console.Clear();		
 		}
 
 		public static void Devolver()
 		{
 			Console.Write("Digite o id do filme: ");
 			int indiceFilme = int.Parse(Console.ReadLine());
+			Console.Clear();
 
 			if((repositorioFilmes.RetornaPorId(indiceFilme).RetornaStatus() == FilmeStatus.Alugado))
 			{
@@ -324,11 +363,11 @@ namespace LocadoraVHS
 			Console.WriteLine("--------------------");
 			Console.WriteLine("A- Alugar filme");
 			Console.WriteLine("D- Devolver filme");
-			Console.WriteLine("C- Limpar Tela");
 			Console.WriteLine("X- Sair");
 			Console.WriteLine();
 
 			string opcaoUsuario = Console.ReadLine().ToUpper();
+			Console.Clear();
 			return opcaoUsuario;
 		}
     }

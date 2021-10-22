@@ -47,16 +47,20 @@ namespace LocadoraVHS
 
 		public void LerDeArquivo()
 		{
-			string line = "";
-            using (StreamReader sr = new StreamReader("RepistórioDeFilmes.csv"))
-            {
-                while ((line = sr.ReadLine()) != null)
-                {
-					string[] campos = line.Split(',');
-                    Filme filme = new Filme(id:int.Parse(campos[0]), genero:Enum.Parse<Genero>(campos[3]), titulo:campos[1], descricao:campos[2], ano:int.Parse(campos[4]), filmeStatus:Enum.Parse<FilmeStatus>(campos[5]), idClienteTomador:int.Parse(campos[6]));
-					Insere(filme);
+			if(File.Exists("RepistórioDeFilmes.csv"))
+			{
+				string line = "";
+				using (StreamReader sr = new StreamReader("RepistórioDeFilmes.csv"))
+				{
+					while ((line = sr.ReadLine()) != null)
+					{
+						string[] campos = line.Split(',');
+						Filme filme = new Filme(id:int.Parse(campos[0]), genero:Enum.Parse<Genero>(campos[3]), titulo:campos[1], descricao:campos[2], ano:int.Parse(campos[4]), filmeStatus:Enum.Parse<FilmeStatus>(campos[5]), idClienteTomador:int.Parse(campos[6]));
+						Insere(filme);
+					}
 				}
-            }
+			}
+			
 		}
     }
 }
